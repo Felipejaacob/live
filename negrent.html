@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cuotas de Frases para Negocios Rentables</title>
+</head>
+<body>
+    <h1>Cuotas de Frases para Negocios Rentables</h1>
+    <div id="quote-container">
+        <p id="quote"></p>
+        <p id="author"></p>
+    </div>
+    <script>
+        function getQuote() {
+            fetch('https://quotes.rest/qod?category=inspire')
+                .then(response => response.json())
+                .then(data => {
+                    const quote = data.contents.quotes[0];
+                    const quoteText = quote.quote;
+                    const quoteAuthor = quote.author;
+                    document.getElementById('quote').textContent = quoteText;
+                    document.getElementById('author').textContent = quoteAuthor;
+                })
+                .catch(error => console.error(error));
+        }
+        getQuote(); // Obtiene la primera cuota al cargar la página
+        setInterval(getQuote, 86400000); // Obtiene una nueva cuota cada 24 horas a las 08:00 AM
+    </script>
+</body>
+</html>
